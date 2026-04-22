@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>USER SIADJAK</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <img src="LOGO.png" alt="Logo SIADJAK" class="logo">
+      <h3>SIADJAK</h3>
+      <small>Arsip Kepesertaan</small>
+      <hr>
+    </div>
+
+    <div class="menu">
+      <div class="menu-item active" onclick="showPage('dash', this)">📌 Dashboard</div>
+      <div class="menu-item" onclick="showPage('arsip', this)">🗂️ Kelola Arsip</div>
+    </div>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <div class="top-header">
+      <div class="top-left">
+        <button class="menu-toggle" type="button" onclick="toggleSidebar()">☰</button>
+        <h2>SISTEM INFORMASI ARSIP DIGITAL JASA KONSTRUKSI</h2>
+      </div>
+
+      <div class="user-area">
+        <div class="user-trigger" onclick="toggleDropdown()">
+          <span id="currentUserTop">👤 User</span>
+          <span>▾</span>
+        </div>
+
+        <div class="dropdown" id="dropdownUser">
+          <div onclick="showInfoUser()">👤 Profile</div>
+          <div onclick="logoutUser()">↪ Logout</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="breadcrumb" id="breadcrumb">Home >> Dashboard</div>
+
+    <!-- DASHBOARD -->
+    <section id="dash" class="page active">
+      <div class="dash-row">
+        <div class="summary-card">
+          <div class="summary-content">
+            <div>
+              <h1 id="totalArsip">0</h1>
+              <p>Total Berkas Arsip</p>
+            </div>
+            <div class="summary-icon">📁</div>
+          </div>
+        </div>
+
+        <div class="summary-placeholder dashboard-user-box">
+          <h3>Dashboard Arsip User</h3>
+          <p>SISTEM INFORMASI ARSIP DIGITAL JASA KONSTRUKSI</p>
+        </div>
+      </div>
+
+      <div class="latest-box">
+        <h3>📂 Berkas Kepesertaan Terbaru</h3>
+        <div id="latestList" class="latest-list"></div>
+
+        <div class="latest-footer">
+          <span>Tampilkan</span>
+          <select id="jumlahTampil" onchange="renderDashboard()">
+            <option value="3" selected>3</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+          </select>
+          <span>Berkas</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- KELOLA ARSIP -->
+    <section id="arsip" class="page">
+      <div class="table-card">
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>No. Proyek</th>
+                <th>Nama Proyek</th>
+                <th>Kontraktor</th>
+                <th>Kontrak</th>
+                <th>Tanggal</th>
+                <th>No. Boks / Laci Filling</th>
+                <th>Status</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="dataArsip"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="search-box bawah">
+        <label>Pencarian:</label>
+        <div class="search-inline">
+          <input id="searchArsipKelola" type="text" placeholder="Cari No. Proyek, Nama Proyek, Tanggal..." onkeyup="filterKelola()">
+          <button type="button">🔎</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- OVERLAY MOBILE -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+<!-- MODAL LIHAT BERKAS -->
+<div class="modal" id="modalLihatBerkas">
+  <div class="modal-box">
+    <button class="close-btn" onclick="closeModal()">✕</button>
+    <h3>Preview Berkas</h3>
+
+    <div class="preview-area">
+      <div class="preview-icon">📄</div>
+      <h4 id="modalNamaFile">nama-file.pdf</h4>
+      <p><strong>No. Proyek:</strong> <span id="modalNoProyek"></span></p>
+      <p><strong>Nama Proyek:</strong> <span id="modalNamaProyek"></span></p>
+      <p><strong>Kontraktor:</strong> <span id="modalKontraktor"></span></p>
+      <p><strong>Tanggal:</strong> <span id="modalTanggal"></span></p>
+      <p><strong>Status:</strong> <span id="modalStatus"></span></p>
+
+      <div class="modal-note">
+        User hanya dapat melihat berkas yang sudah dikirim dan tidak dapat mengedit data.
+      </div>
+
+      <button class="btn-download" type="button" onclick="downloadDummy()">⬇ Download Berkas</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PROFIL USER -->
+<div class="modal" id="modalProfileUser">
+  <div class="modal-box">
+    <button class="close-btn" onclick="closeProfileModal()">✕</button>
+    <h3>Profil User</h3>
+
+    <div class="profile-view">
+      <div class="profile-avatar">👤</div>
+
+      <div class="profile-item-box">
+        <span class="profile-label">Nama</span>
+        <strong id="profileNama">-</strong>
+      </div>
+
+      <div class="profile-item-box">
+        <span class="profile-label">Email</span>
+        <strong id="profileEmail">-</strong>
+      </div>
+
+      <div class="profile-item-box">
+        <span class="profile-label">Role</span>
+        <strong id="profileRole">-</strong>
+      </div>
+
+      <div class="profile-item-box">
+        <span class="profile-label">Username</span>
+        <strong id="profileUsername">-</strong>
+      </div>
+
+      <div class="profile-item-box">
+        <span class="profile-label">Status</span>
+        <strong id="profileStatus">-</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
