@@ -203,7 +203,7 @@ function renderKelola(list = data){
         <td>${d.boks}</td>
         <td><span class="status-kirim">${d.status || "Terkirim"}</span></td>
         <td>
-          <button class="aksi-btn" type="button" onclick="lihatBerkas(${indexAsli})">Lihat Berkas</button>
+          <button class="aksi-btn" type="button" onclick="lihatBerkas(${indexAsli})">Lihat Dokumen</button>
         </td>
       </tr>
     `;
