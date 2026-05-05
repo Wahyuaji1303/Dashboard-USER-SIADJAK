@@ -16,8 +16,6 @@
   --muted:#70798b;
   --line:#dbe2ec;
   --shadow:0 14px 28px rgba(15, 23, 42, 0.10);
-  --green:#2ea44f;
-  --soft-green:#dff5e5;
 }
 
 html, body{
@@ -281,7 +279,7 @@ body{
   line-height:1.6;
 }
 
-/* BERKAS TERBARU */
+/* DOKUMEN TERBARU */
 .latest-box{
   width:100%;
   max-width:980px;
@@ -408,34 +406,34 @@ tbody tr:hover{
   background:#f8fbff;
 }
 
-.status-kirim{
-  display:inline-block;
-  padding:8px 12px;
-  border-radius:999px;
-  background:var(--soft-green);
-  color:var(--green);
-  font-size:13px;
-  font-weight:700;
-}
-
 .aksi-btn{
   border:none;
   background:#3468dc;
   color:#fff;
-  padding:8px 12px;
-  border-radius:8px;
-  font-size:12px;
+  padding:10px 14px;
+  border-radius:10px;
+  font-size:13px;
   cursor:pointer;
   white-space:nowrap;
+  font-weight:600;
 }
 
 .aksi-btn:hover{
   background:#2758c4;
 }
 
-/* SEARCH */
-.search-box.bawah{
+/* SEARCH + KONTRAKTOR */
+.kelola-bottom-tools{
   margin-top:26px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.search-box.bawah,
+.kontraktor-box{
   display:flex;
   align-items:center;
   gap:14px;
@@ -447,12 +445,15 @@ tbody tr:hover{
   color:#fff;
 }
 
-.search-box.bawah label{
+.search-box.bawah label,
+.kontraktor-box label{
   font-size:18px;
   font-weight:500;
+  white-space:nowrap;
 }
 
-.search-inline{
+.search-inline,
+.kontraktor-inline{
   display:flex;
   align-items:center;
   gap:10px;
@@ -460,7 +461,7 @@ tbody tr:hover{
 }
 
 .search-inline input{
-  width:260px;
+  width:300px;
   max-width:100%;
   padding:12px 14px;
   border:none;
@@ -469,13 +470,32 @@ tbody tr:hover{
   color:#000;
 }
 
-.search-inline button{
+.kontraktor-inline select{
+  width:260px;
+  max-width:100%;
+  padding:12px 14px;
+  border:none;
+  border-radius:10px;
+  background:#fff;
+  color:#10213f;
+  font-size:14px;
+  cursor:pointer;
+}
+
+.search-inline button,
+.kontraktor-inline button{
   border:none;
   background:var(--navy);
   color:#fff;
   padding:12px 14px;
   border-radius:10px;
   cursor:pointer;
+  font-size:16px;
+}
+
+.search-inline button:hover,
+.kontraktor-inline button:hover{
+  background:#142e73;
 }
 
 /* MODAL */
@@ -783,17 +803,29 @@ tbody tr:hover{
     white-space:normal;
   }
 
-  .search-box.bawah{
+  .kelola-bottom-tools{
+    flex-direction:column;
+  }
+
+  .search-box.bawah,
+  .kontraktor-box{
     width:100%;
     flex-direction:column;
     align-items:stretch;
   }
 
-  .search-inline{
+  .search-inline,
+  .kontraktor-inline{
     width:100%;
   }
 
-  .search-inline input{
+  .search-inline input,
+  .kontraktor-inline select{
+    width:100%;
+  }
+
+  .search-inline button,
+  .kontraktor-inline button{
     width:100%;
   }
 
@@ -870,7 +902,8 @@ tbody tr:hover{
     padding:14px 18px;
   }
 
-  .search-box.bawah label{
+  .search-box.bawah label,
+  .kontraktor-box label{
     font-size:16px;
   }
 
