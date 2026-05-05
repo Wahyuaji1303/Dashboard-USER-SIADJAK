@@ -88,7 +88,7 @@
       </div>
     </section>
 
-    <!-- KELOLA ARSIP -->
+    <!-- KELOLA DOKUMEN -->
     <section id="arsip" class="page">
       <div class="table-card">
         <div class="table-wrapper">
@@ -101,7 +101,6 @@
                 <th>Kontrak</th>
                 <th>Tanggal</th>
                 <th>No. Boks / Laci Filling</th>
-                <th>Status</th>
                 <th>Aksi</th>
               </tr>
             </thead>
@@ -110,11 +109,28 @@
         </div>
       </div>
 
-      <div class="search-box bawah">
-        <label>Pencarian:</label>
-        <div class="search-inline">
-          <input id="searchArsipKelola" type="text" placeholder="Cari No. Proyek, Nama Proyek, Tanggal..." onkeyup="filterKelola()">
-          <button type="button">🔎</button>
+      <div class="kelola-bottom-tools">
+        <div class="search-box bawah">
+          <label>Pencarian:</label>
+          <div class="search-inline">
+            <input id="searchArsipKelola" type="text" placeholder="Cari No. Proyek, Nama Proyek, Tanggal..." onkeyup="filterKelola()">
+            <button type="button" onclick="filterKelola()">🔎</button>
+          </div>
+        </div>
+
+        <div class="kontraktor-box">
+          <label for="filterKontraktor">Pencarian Kontraktor:</label>
+          <div class="kontraktor-inline">
+            <select id="filterKontraktor" onchange="filterKelola()">
+              <option value="">Pilih Kontraktor</option>
+              <option value="Dua Sinar Duta Jaya">Dua Sinar Duta Jaya</option>
+              <option value="Trijayamahe">Trijayamahe</option>
+              <option value="Barito Anugrah Sejati">Barito Anugrah Sejati</option>
+              <option value="Gunung Api Mulia">Gunung Api Mulia</option>
+              <option value="Putra Teknik Sejahtera">Putra Teknik Sejahtera</option>
+            </select>
+            <button type="button" onclick="filterKelola()">🔎</button>
+          </div>
         </div>
       </div>
     </section>
@@ -125,7 +141,7 @@
 <!-- OVERLAY MOBILE -->
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-<!-- MODAL LIHAT BERKAS -->
+<!-- MODAL LIHAT DOKUMEN -->
 <div class="modal" id="modalLihatBerkas">
   <div class="modal-box">
     <button class="close-btn" onclick="closeModal()">✕</button>
@@ -138,7 +154,6 @@
       <p><strong>Nama Proyek:</strong> <span id="modalNamaProyek"></span></p>
       <p><strong>Kontraktor:</strong> <span id="modalKontraktor"></span></p>
       <p><strong>Tanggal:</strong> <span id="modalTanggal"></span></p>
-      <p><strong>Status:</strong> <span id="modalStatus"></span></p>
 
       <div class="modal-note">
         User hanya dapat melihat dokumen yang sudah dikirim dan tidak dapat mengedit data.
@@ -176,11 +191,6 @@
       <div class="profile-item-box">
         <span class="profile-label">Username</span>
         <strong id="profileUsername">-</strong>
-      </div>
-
-      <div class="profile-item-box">
-        <span class="profile-label">Status</span>
-        <strong id="profileStatus">-</strong>
       </div>
     </div>
   </div>
