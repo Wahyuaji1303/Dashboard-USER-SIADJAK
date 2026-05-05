@@ -7,7 +7,7 @@ function showPage(id, el = null){
 
   const titleMap = {
     dash: "Home >> Dashboard",
-    arsip: "Home >> Kelola Arsip"
+    arsip: "Home >> Kelola Dokumen"
   };
 
   document.getElementById("breadcrumb").innerText = titleMap[id] || "Home";
@@ -47,9 +47,6 @@ window.addEventListener("click", function(e){
   }
 });
 
-/* PROFIL USER LOGIN
-   Harus akun user yang mengirim arsip, bukan admin.
-   Simulasinya diambil dari akun user login saat ini. */
 const currentUser = {
   nama: "Brendy Bagus",
   email: "BrendyBagus@gmail.com",
@@ -65,7 +62,6 @@ function showInfoUser(){
   document.getElementById("profileEmail").innerText = currentUser.email;
   document.getElementById("profileRole").innerText = currentUser.role;
   document.getElementById("profileUsername").innerText = currentUser.username;
-  document.getElementById("profileStatus").innerText = currentUser.status;
 
   document.getElementById("dropdownUser").classList.remove("show");
   document.getElementById("modalProfileUser").classList.add("show");
@@ -91,7 +87,6 @@ const defaultData = [
     tanggal: "15 April 2025",
     boks: "Filling Cabinet 5 Laci 1",
     file: "79226_DuaSinarDutaJaya.pdf",
-    status: "Terkirim",
     pengirim: "Brendy Bagus",
     emailPengirim: "BrendyBagus@gmail.com"
   },
@@ -103,7 +98,6 @@ const defaultData = [
     tanggal: "20 Februari 2025",
     boks: "Filling Cabinet 5 Laci 1",
     file: "70014_Trijayamahe.pdf",
-    status: "Terkirim",
     pengirim: "Trijayamahe",
     emailPengirim: "Trijayamahe@gmail.com"
   },
@@ -115,7 +109,6 @@ const defaultData = [
     tanggal: "2 Januari 2025",
     boks: "Filling Cabinet 5 Laci 1",
     file: "66655_BaritoAnugrahSejati.pdf",
-    status: "Terkirim",
     pengirim: "Barito Anugrah",
     emailPengirim: "BaritoAnugrahSejati@gmail.com"
   }
@@ -176,6 +169,7 @@ function formatTanggalSingkat(tanggal){
   };
 
   const parts = tanggal.split(" ");
+
   if (parts.length >= 3) {
     const hari = parts[0];
     const bulan = bulanMap[parts[1]] || parts[1];
@@ -201,7 +195,6 @@ function renderKelola(list = data){
         <td>${d.masa}</td>
         <td>${d.tanggal}</td>
         <td>${d.boks}</td>
-        <td><span class="status-kirim">${d.status || "Terkirim"}</span></td>
         <td>
           <button class="aksi-btn" type="button" onclick="lihatBerkas(${indexAsli})">Lihat Dokumen</button>
         </td>
@@ -212,18 +205,27 @@ function renderKelola(list = data){
   if (list.length === 0) {
     table.innerHTML = `
       <tr>
-        <td colspan="8" style="text-align:center;">Data arsip tidak ditemukan</td>
+        <td colspan="7" style="text-align:center;">Data dokumen tidak ditemukan</td>
       </tr>
     `;
   }
 }
 
 function filterKelola(){
-  const keyword = document.getElementById("searchArsipKelola").value.toLowerCase();
+  const keywordInput = document.getElementById("searchArsipKelola");
+  const kontraktorInput = document.getElementById("filterKontraktor");
+
+  const keyword = keywordInput ? keywordInput.value.toLowerCase().trim() : "";
+  const kontraktorDipilih = kontraktorInput ? kontraktorInput.value.toLowerCase().trim() : "";
 
   const hasil = data.filter(d => {
-    const isi = `${d.no} ${d.nama} ${d.kontraktor} ${d.tanggal} ${d.boks} ${d.status}`.toLowerCase();
-    return isi.includes(keyword);
+    const isi = `${d.no} ${d.nama} ${d.kontraktor} ${d.tanggal} ${d.boks}`.toLowerCase();
+
+    const cocokKeyword = isi.includes(keyword);
+    const cocokKontraktor =
+      kontraktorDipilih === "" || d.kontraktor.toLowerCase() === kontraktorDipilih;
+
+    return cocokKeyword && cocokKontraktor;
   });
 
   renderKelola(hasil);
@@ -237,7 +239,6 @@ function lihatBerkas(index){
   document.getElementById("modalNamaProyek").innerText = currentBerkas.nama || "-";
   document.getElementById("modalKontraktor").innerText = currentBerkas.kontraktor || "-";
   document.getElementById("modalTanggal").innerText = currentBerkas.tanggal || "-";
-  document.getElementById("modalStatus").innerText = currentBerkas.status || "Terkirim";
 
   document.getElementById("modalLihatBerkas").classList.add("show");
 }
@@ -248,7 +249,7 @@ function closeModal(){
 
 function downloadDummy(){
   if (!currentBerkas) return;
-  alert("Download berkas: " + currentBerkas.file);
+  alert("Download dokumen: " + currentBerkas.file);
 }
 
 window.addEventListener("click", function(e){
