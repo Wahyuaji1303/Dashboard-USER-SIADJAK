@@ -25,6 +25,7 @@
     <div class="menu">
       <div class="menu-item active" onclick="showPage('dash', this)">📌 Dashboard</div>
       <div class="menu-item" onclick="showPage('arsip', this)">🗂️ Kelola Dokumen</div>
+      <div class="menu-item" onclick="showPage('search', this)">🔎 Pencarian</div>
     </div>
   </aside>
 
@@ -109,7 +110,7 @@
         </div>
       </div>
 
-      <div class="kelola-bottom-tools">
+            <div class="kelola-bottom-tools">
         <div class="search-box bawah">
           <label>Pencarian:</label>
           <div class="search-inline">
@@ -135,8 +136,104 @@
       </div>
     </section>
 
-  </main>
+
+   
+    <section id="search" class="page">
+
+<h2 class="judul-search">
+🔎 Pencarian Dokumen
+</h2>
+
+<div class="search-card">
+
+<div class="search-grid">
+
+<div class="form-group">
+<label>Cari No. Proyek</label>
+<input
+type="text"
+id="searchNo"
+placeholder="Tambahkan No. Proyek...">
 </div>
+
+<div class="form-group">
+<label>Cari Nama Proyek</label>
+<input
+type="text"
+id="searchNama"
+placeholder="Tambahkan Nama Proyek...">
+</div>
+
+<div class="form-group">
+<label>Cari Kontraktor</label>
+<input
+type="text"
+id="searchKontraktor"
+placeholder="Tambahkan Kontraktor...">
+</div>
+
+<div class="form-group">
+<label>Cari Tanggal</label>
+<input
+type="date"
+id="searchTanggal">
+</div>
+
+</div>
+
+<div class="search-button">
+
+<button
+class="btn-search"
+onclick="cariDokumenUser()">
+
+🔎 Cari Dokumen
+
+</button>
+
+</div>
+
+</div>
+
+<div class="table-card">
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>No. Proyek</th>
+
+<th>Nama Proyek</th>
+
+<th>Kontraktor</th>
+
+<th>Kontrak</th>
+
+<th>Tanggal</th>
+
+<th>No. Boks / Laci Filling</th>
+
+<th>Aksi</th>
+
+</tr>
+
+</thead>
+
+<tbody id="hasilCariUser">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</section>
 
 <!-- OVERLAY MOBILE -->
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
