@@ -7,7 +7,8 @@ function showPage(id, el = null){
 
   const titleMap = {
     dash: "Home >> Dashboard",
-    arsip: "Home >> Kelola Dokumen"
+    arsip: "Home >> Kelola Dokumen",
+    search:"Home >> Pencarian Dokumen"
   };
 
   document.getElementById("breadcrumb").innerText = titleMap[id] || "Home";
@@ -72,10 +73,22 @@ function closeProfileModal(){
 }
 
 function logoutUser(){
-  if(confirm("Yakin ingin logout?")){
+
+    if(!confirm("Apakah Anda yakin ingin logout?")){
+        return;
+    }
+
+    //hapus session login
+    localStorage.removeItem("loginUser");
+    localStorage.removeItem("currentUser");
+    sessionStorage.clear();
+
     alert("Logout berhasil.");
-    location.reload();
-  }
+
+    //kembali ke halaman login
+    window.location.href =
+    "https://wahyuaji1303.github.io/SIADJAK-Arsip-Digital-Jasa-Konstruksi-/";
+
 }
 
 const defaultData = [
@@ -229,6 +242,102 @@ function filterKelola(){
   });
 
   renderKelola(hasil);
+}
+
+function cariDokumenUser(){
+
+const no=document.getElementById("searchNo").value.toLowerCase();
+
+const nama=document.getElementById("searchNama").value.toLowerCase();
+
+const kontraktor=document.getElementById("searchKontraktor").value.toLowerCase();
+
+const tanggal=document.getElementById("searchTanggal").value;
+
+const tbody=document.getElementById("hasilCariUser");
+
+tbody.innerHTML="";
+
+const hasil=data.filter(item=>{
+
+const cocokTanggal=
+
+tanggal===""
+
+||
+
+formatTanggalSingkat(item.tanggal)===tanggal
+
+||
+
+item.tanggal===tanggal;
+
+return item.no.toLowerCase().includes(no)
+
+&& item.nama.toLowerCase().includes(nama)
+
+&& item.kontraktor.toLowerCase().includes(kontraktor)
+
+&& cocokTanggal;
+
+});
+
+if(hasil.length===0){
+
+tbody.innerHTML=
+
+`<tr>
+
+<td colspan="7">
+
+Data tidak ditemukan
+
+</td>
+
+</tr>`;
+
+return;
+
+}
+
+hasil.forEach(item=>{
+
+const index=data.findIndex(x=>x.no===item.no);
+
+tbody.innerHTML+=`
+
+<tr>
+
+<td>${item.no}</td>
+
+<td>${item.nama}</td>
+
+<td>${item.kontraktor}</td>
+
+<td>${item.masa}</td>
+
+<td>${item.tanggal}</td>
+
+<td>${item.boks}</td>
+
+<td>
+
+<button
+class="aksi-btn"
+onclick="lihatBerkas(${index})">
+
+Lihat Dokumen
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
 }
 
 function lihatBerkas(index){
