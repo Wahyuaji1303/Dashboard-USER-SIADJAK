@@ -52,7 +52,7 @@ const currentUser = {
   nama: "Bowo Prakoso",
   email: "bowo.prakoso@bpjsketenagakerjaan.go.id",
   role: "User",
-  username: "Bowo Prakoso",
+  username: "Bowoprakoso",
 };
 
 document.getElementById("currentUserTop").innerText = `👤 ${currentUser.nama.split(" ")[0]}`;
@@ -100,7 +100,7 @@ const defaultData = [
     boks: "Filling Cabinet 5 Laci 1",
     file: "79226_DuaSinarDutaJaya.pdf",
     pengirim: "Brendy Bagus",
-    emailPengirim: "BrendyBagus@gmail.com"
+    emailPengirim: "BrendyBagus@bpjsketenagakerjaan.go.id"
   },
   {
     no: "2500001470014",
@@ -111,7 +111,7 @@ const defaultData = [
     boks: "Filling Cabinet 5 Laci 1",
     file: "70014_Trijayamahe.pdf",
     pengirim: "Trijayamahe",
-    emailPengirim: "Trijayamahe@gmail.com"
+    emailPengirim: "Trijayamahe@bpjsketenagakerjaan.go.id"
   },
   {
     no: "2500001466655",
@@ -122,7 +122,7 @@ const defaultData = [
     boks: "Filling Cabinet 5 Laci 1",
     file: "66655_BaritoAnugrahSejati.pdf",
     pengirim: "Barito Anugrah",
-    emailPengirim: "BaritoAnugrahSejati@gmail.com"
+    emailPengirim: "BaritoAnugrahSejati@bpjsketenagakerjaan.go.id"
   },
   {
     no: "2500001654175",
@@ -133,7 +133,7 @@ const defaultData = [
     boks: "Filling Cabinet 5 Laci 1",
     file: "1654175_ALFASINDO_PRATAMA.pdf",
     pengirim: "ALFASINDO PRATAMA",
-    emailPengirim: "alfasindo@gmail.com"
+    emailPengirim: "alfasindo@bpjsketenagakerjaan.go.id"
 },
 {
     no: "2500001654148",
@@ -144,7 +144,7 @@ const defaultData = [
     boks: "Filling Cabinet 5 Laci 1",
     file: "1654148_ALFASINDO_PRATAMA.pdf",
     pengirim: "ALFASINDO PRATAMA",
-    emailPengirim: "alfasindo@gmail.com"
+    emailPengirim: "alfasindo@bpjsketenagakerjaan.go.id"
 }
 ];
 
