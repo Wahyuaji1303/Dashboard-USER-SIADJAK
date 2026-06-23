@@ -7,7 +7,7 @@ function showPage(id, el = null){
 
   const titleMap = {
     dash: "Home >> Dashboard",
-    arsip: "Home >> Kelola Dokumen",
+    arsip: "Home >> Kelola Arsip",
     search:"Home >> Pencarian Dokumen"
   };
 
@@ -49,11 +49,10 @@ window.addEventListener("click", function(e){
 });
 
 const currentUser = {
-  nama: "Brendy Bagus",
-  email: "BrendyBagus@gmail.com",
+  nama: "Bowo Prakoso",
+  email: "bowo.prakoso@bpjsketenagakerjaan.go.id",
   role: "User",
-  username: "Brendy123",
-  status: "Aktif"
+  username: "Bowo Prakoso",
 };
 
 document.getElementById("currentUserTop").innerText = `👤 ${currentUser.nama.split(" ")[0]}`;
@@ -124,15 +123,37 @@ const defaultData = [
     file: "66655_BaritoAnugrahSejati.pdf",
     pengirim: "Barito Anugrah",
     emailPengirim: "BaritoAnugrahSejati@gmail.com"
-  }
+  },
+  {
+    no: "2500001654175",
+    nama: "Rehabilitasi Ringan Bangunan Tidak Bertingkat 30 Paket E294",
+    kontraktor: "ALFASINDO PRATAMA",
+    masa: "26 November 2025 s/d 26 Desember 2026",
+    tanggal: "26 November 2025",
+    boks: "Filling Cabinet 5 Laci 1",
+    file: "1654175_ALFASINDO_PRATAMA.pdf",
+    pengirim: "ALFASINDO PRATAMA",
+    emailPengirim: "alfasindo@gmail.com"
+},
+{
+    no: "2500001654148",
+    nama: "Rehabilitasi Ringan Bangunan Tidak Bertingkat 30 Paket E416",
+    kontraktor: "ALFASINDO PRATAMA",
+    masa: "26 November 2025 s/d 26 Desember 2026",
+    tanggal: "26 November 2025",
+    boks: "Filling Cabinet 5 Laci 1",
+    file: "1654148_ALFASINDO_PRATAMA.pdf",
+    pengirim: "ALFASINDO PRATAMA",
+    emailPengirim: "alfasindo@gmail.com"
+}
 ];
 
-let data = JSON.parse(localStorage.getItem("arsip_user_siadjak_dua_menu_view_only"));
+let data = defaultData;
 
-if (!data || data.length === 0) {
-  data = defaultData;
-  localStorage.setItem("arsip_user_siadjak_dua_menu_view_only", JSON.stringify(data));
-}
+localStorage.setItem(
+    "arsip_user_siadjak_dua_menu_view_only",
+    JSON.stringify(defaultData)
+);
 
 let currentBerkas = null;
 
@@ -147,7 +168,11 @@ function renderDashboard(){
   const latestList = document.getElementById("latestList");
   latestList.innerHTML = "";
 
-  const jumlah = parseInt(document.getElementById("jumlahTampil").value, 10) || 3;
+const jumlah =
+parseInt(
+document.getElementById("jumlahTampil").value,
+10
+) || 5;
 
   data.slice(0, jumlah).forEach(item => {
     latestList.innerHTML += `
@@ -222,26 +247,6 @@ function renderKelola(list = data){
       </tr>
     `;
   }
-}
-
-function filterKelola(){
-  const keywordInput = document.getElementById("searchArsipKelola");
-  const kontraktorInput = document.getElementById("filterKontraktor");
-
-  const keyword = keywordInput ? keywordInput.value.toLowerCase().trim() : "";
-  const kontraktorDipilih = kontraktorInput ? kontraktorInput.value.toLowerCase().trim() : "";
-
-  const hasil = data.filter(d => {
-    const isi = `${d.no} ${d.nama} ${d.kontraktor} ${d.tanggal} ${d.boks}`.toLowerCase();
-
-    const cocokKeyword = isi.includes(keyword);
-    const cocokKontraktor =
-      kontraktorDipilih === "" || d.kontraktor.toLowerCase() === kontraktorDipilih;
-
-    return cocokKeyword && cocokKontraktor;
-  });
-
-  renderKelola(hasil);
 }
 
 function cariDokumenUser(){
