@@ -24,7 +24,7 @@
 
     <div class="menu">
       <div class="menu-item active" onclick="showPage('dash', this)">📌 Dashboard</div>
-      <div class="menu-item" onclick="showPage('arsip', this)">🗂️ Kelola Dokumen</div>
+      <div class="menu-item" onclick="showPage('arsip', this)">🗂️ Kelola Arsip</div>
       <div class="menu-item" onclick="showPage('search', this)">🔎 Pencarian</div>
     </div>
   </aside>
@@ -55,41 +55,58 @@
 
     <!-- DASHBOARD -->
     <section id="dash" class="page active">
-      <div class="dash-row">
-        <div class="summary-card">
-          <div class="summary-content">
-            <div>
-              <h1 id="totalArsip">0</h1>
-              <p>Total Dokumen Arsip</p>
+
+    <!-- CARD TOTAL -->
+    <div class="summary-card">
+        <div class="summary-content">
+
+            <div class="summary-left">
+                <p class="summary-title">
+                    Total Dokumen Arsip
+                </p>
+
+                <h1 id="totalArsip">0</h1>
             </div>
-            <div class="summary-icon">📁</div>
-          </div>
-        </div>
 
-        <div class="summary-placeholder dashboard-user-box">
-          <h3>Dashboard Arsip User</h3>
-          <p>SISTEM INFORMASI ARSIP DIGITAL JASA KONSTRUKSI</p>
-        </div>
-      </div>
+            <div class="summary-icon">
+                📁
+            </div>
 
-      <div class="latest-box">
-        <h3>📂 Dokumen Kepesertaan Terbaru</h3>
-        <div id="latestList" class="latest-list"></div>
+        </div>
+    </div>
+
+    <!-- DOKUMEN TERBARU -->
+    <div class="latest-box">
+
+        <h3>
+            📂 Dokumen Kepesertaan Terbaru
+        </h3>
+
+        <div id="latestList"
+        class="latest-list">
+        </div>
 
         <div class="latest-footer">
-          <span>Tampilkan</span>
-          <select id="jumlahTampil" onchange="renderDashboard()">
-            <option value="3" selected>3</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="50">50</option>
-          </select>
-          <span>Dokumen</span>
-        </div>
-      </div>
-    </section>
+            <span>Tampilkan</span>
 
-    <!-- KELOLA DOKUMEN -->
+           <select
+              id="jumlahTampil"
+              onchange="renderDashboard()">
+
+              <option value="5" selected>5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+
+              </select>
+
+            <span>Dokumen</span>
+        </div>
+
+    </div>
+
+</section>
+
+    <!-- KELOLA Arsip -->
     <section id="arsip" class="page">
       <div class="table-card">
         <div class="table-wrapper">
@@ -108,33 +125,8 @@
             <tbody id="dataArsip"></tbody>
           </table>
         </div>
-      </div>
-
-            <div class="kelola-bottom-tools">
-        <div class="search-box bawah">
-          <label>Pencarian:</label>
-          <div class="search-inline">
-            <input id="searchArsipKelola" type="text" placeholder="Cari No. Proyek, Nama Proyek, Tanggal..." onkeyup="filterKelola()">
-            <button type="button" onclick="filterKelola()">🔎</button>
-          </div>
-        </div>
-
-        <div class="kontraktor-box">
-          <label for="filterKontraktor">Pencarian Kontraktor:</label>
-          <div class="kontraktor-inline">
-            <select id="filterKontraktor" onchange="filterKelola()">
-              <option value="">Pilih Kontraktor</option>
-              <option value="Dua Sinar Duta Jaya">Dua Sinar Duta Jaya</option>
-              <option value="Trijayamahe">Trijayamahe</option>
-              <option value="Barito Anugrah Sejati">Barito Anugrah Sejati</option>
-              <option value="Gunung Api Mulia">Gunung Api Mulia</option>
-              <option value="Putra Teknik Sejahtera">Putra Teknik Sejahtera</option>
-            </select>
-            <button type="button" onclick="filterKelola()">🔎</button>
-          </div>
-        </div>
-      </div>
-    </section>
+      </div>      
+      </section>
 
 
    
